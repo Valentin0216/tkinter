@@ -25,8 +25,13 @@ harmadik_input.grid(row=2, column=1)
 
 villanykorte = PhotoImage(file="villanykorte.png")
 
-kep = Label(window, image=villanykorte)
-kep.grid(row=0, column=2, rowspan=3)
+canvas = Canvas(window, width=150, height=150)
+canvas.grid(row=0, column=2, rowspan=3)
+
+canvas.create_image(150, 150,image=villanykorte, anchor=SE)
+
+# kep = Label(window, image=villanykorte)
+# kep.grid(row=0, column=2, rowspan=3)
 
 
 window.mainloop()
