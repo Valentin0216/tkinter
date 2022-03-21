@@ -3,6 +3,8 @@ from tkinter import *
 window = Tk()
 window.title("Feladat")
 
+kep = "villanykorte.png"
+
 elso_mezo = Label(window, text="Első mező:")
 elso_mezo.grid(row=0, column=0, pady=5)
 
@@ -20,5 +22,11 @@ harmadik_mezo.grid(row=2, column=0, pady=5)
 
 harmadik_input = Entry(window)
 harmadik_input.grid(row=2, column=1)
+
+villanykorte = PhotoImage(file="villanykorte.png")
+
+kep = Label(window, image=villanykorte)
+kep.grid(row=0, column=2, rowspan=3)
+
 
 window.mainloop()
