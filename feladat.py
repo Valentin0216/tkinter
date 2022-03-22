@@ -33,5 +33,4 @@ canvas.create_image(150, 150,image=villanykorte, anchor=SE)
 # kep = Label(window, image=villanykorte)
 # kep.grid(row=0, column=2, rowspan=3)
 
-
 window.mainloop()
