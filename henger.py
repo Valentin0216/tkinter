@@ -1,18 +1,24 @@
 from tkinter import *
 from math import pi
+from tkinter import messagebox
 
 def szamitas():
-    vas_suruseg = 7.8
-    fa_surue
-    sugara = int(sugar.get())
-    magassaga = int(magassag.get())
-    vegeredmeny = pi * sugara * sugara * magassaga
-    terfogat.delete(0, END)
-    vashenger.delete(0, END)
-    terfogat.insert(0, "{:.2f}".format(vegeredmeny) + " cm3")
-    vashenger_tomeg = vas_suruseg * vegeredmeny
-    vashenger.insert(0, "{:.2f}".format(vashenger_tomeg) + " g")
-    fahenger_tomeg = 
+    try:
+        vas_suruseg = 7.8
+        fa_suruseg = 0.70
+        sugara = int(sugar.get())
+        magassaga = int(magassag.get())
+        vegeredmeny = pi * sugara * sugara * magassaga
+        terfogat.delete(0, END)
+        vashenger.delete(0, END)
+        fahenger.delete(0, END)
+        terfogat.insert(0, "{:.2f}".format(vegeredmeny) + " cm3")
+        vashenger_tomeg = vas_suruseg * vegeredmeny
+        vashenger.insert(0, "{:.2f}".format(vashenger_tomeg) + " g")
+        fahenger_tomeg = fa_suruseg * vegeredmeny
+        fahenger.insert(0, "{:.2f}".format(fahenger_tomeg) + " g")
+    except:
+        messagebox.showerror("Hiba!", "Csak számot adj meg!")
 
 
 window = Tk()
