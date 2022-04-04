@@ -34,7 +34,8 @@ def szamitas():
         else:
             belefer_meg = hordo_liter - bekert_liter
             szazalek = 100 / hordo_liter * belefer_meg
-            showinfo("Belefér!", f"Belefér a hordóba a megadott mennyiség! Ezen kívül marad még {belefer_meg} liter szabadon! (A hordó {szazalek}%-a üres!)")
+            # showinfo("Belefér!", f"Belefér a hordóba a megadott mennyiség! Ezen kívül marad még {belefer_meg} liter szabadon! (A hordó {szazalek}%-a üres!)")
+            showinfo("Belefér!", f"Belefér a hordóba a megadott mennyiség! Ezen kívül marad még {belefer_meg} liter szabadon! A hordó " + "{:.0f}".format(szazalek) + " százaléka üres még!")
     except:
         showerror("Hiba!", "Csak számokat adj meg, és minden mezőbe írj valamit!")
 
