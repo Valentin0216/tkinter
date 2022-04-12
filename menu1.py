@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
+from math import pi
 
 def nevjegy():
     ablak2 = Toplevel(foablak)
@@ -14,12 +16,19 @@ def felszin():
         b = int(b_input.get())
         c = int(c_input.get())
 
-        teglatest_felszine = 2*(a*b+a*c+b*c)
+        if a <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg mínuszt, vagy 0-át. Megértését köszönjük!")
+        elif b <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg mínuszt, vagy 0-át. Megértését köszönjük!")
+        elif c <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg mínuszt, vagy 0-át. Megértését köszönjük!")
+        else:
+            teglatest_felszine = 2*(a*b+a*c+b*c)
 
-        eredmeny_jelzo.delete(0, END)
-        eredmeny_jelzo.configure(state=NORMAL)
-        eredmeny_jelzo.insert(0, teglatest_felszine)
-        eredmeny_jelzo.configure(state='readonly')
+            eredmeny_jelzo.configure(state=NORMAL)
+            eredmeny_jelzo.delete(0, END)
+            eredmeny_jelzo.insert(0, teglatest_felszine)
+            eredmeny_jelzo.configure(state='readonly')
 
     felszin_ablak = Toplevel(foablak)
     felszin_ablak.title("A téglatest felszíne")
@@ -51,6 +60,9 @@ def felszin():
     eredmeny_jelzo = Entry(felszin_ablak, state='readonly')
     eredmeny_jelzo.grid(row=4, column=1)
 
+    kilepes_gomb = Button(felszin_ablak, text="Kilépés", command=felszin_ablak.destroy)
+    kilepes_gomb.grid(row=5, column=1)
+
     felszin_ablak.mainloop()
 
 def terfogat():
@@ -59,12 +71,19 @@ def terfogat():
         b = int(b_input.get())
         c = int(c_input.get())
 
-        teglatest_terfogata = a*b*c
+        if a <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg mínuszt, vagy 0-át. Megértését köszönjük!")
+        elif b <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg mínuszt, vagy 0-át. Megértését köszönjük!")
+        elif c <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg mínuszt, vagy 0-át. Megértését köszönjük!")
+        else:
+            teglatest_terfogata = a*b*c
 
-        eredmeny_jelzo.delete(0, END)
-        eredmeny_jelzo.configure(state=NORMAL)
-        eredmeny_jelzo.insert(0, teglatest_terfogata)
-        eredmeny_jelzo.configure(state='readonly')
+            eredmeny_jelzo.configure(state=NORMAL)
+            eredmeny_jelzo.delete(0, END)
+            eredmeny_jelzo.insert(0, teglatest_terfogata)
+            eredmeny_jelzo.configure(state='readonly')
 
     terfogat_ablak = Toplevel(foablak)
     terfogat_ablak.title("A téglatest térfogata")
@@ -96,7 +115,98 @@ def terfogat():
     eredmeny_jelzo = Entry(terfogat_ablak, state='readonly')
     eredmeny_jelzo.grid(row=4, column=1)
 
+    kilepes_gomb = Button(terfogat_ablak, text="Kilépés", command=terfogat_ablak.destroy)
+    kilepes_gomb.grid(row=5, column=1)
+
     terfogat_ablak.mainloop()
+
+def henger_felszin():   #2*π*r(r+h)
+    def szamitas():
+        sugara = int(sugara_bemenet.get())
+        magassaga = int(magassag_bemenet.get())
+        
+        if sugara <= 0 or magassaga <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg 0-át, vagy mínuszos számot!")
+        else:
+            felszine = 2*pi*sugara*(sugara+magassaga)
+
+            eredmeny_jelzo.configure(state=NORMAL)
+            eredmeny_jelzo.delete(0, END)
+            eredmeny_jelzo.insert(0, "{:.2f}".format(felszine) + " cm3")
+            eredmeny_jelzo.configure(state="readonly")
+
+    henger_felszin_ablak = Toplevel(foablak)
+    henger_felszin_ablak.title("Henger felszíne")
+
+    sugara_text = Label(henger_felszin_ablak, text="Henger sugara: ")
+    sugara_text.grid(row=0)
+
+    sugara_bemenet = Entry(henger_felszin_ablak)
+    sugara_bemenet.grid(row=0, column=1)
+
+    magassag_szoveg = Label(henger_felszin_ablak, text="Magassága:")
+    magassag_szoveg.grid(row=1, column=0)
+
+    magassag_bemenet = Entry(henger_felszin_ablak)
+    magassag_bemenet.grid(row=1, column=1)
+
+    szamol = Button(henger_felszin_ablak, text="Számol", command=szamitas)
+    szamol.grid(row=2, column=1)
+
+    eredmeny = Label(henger_felszin_ablak, text="Eredmény:")
+    eredmeny.grid(row=4)
+
+    eredmeny_jelzo = Entry(henger_felszin_ablak, state='readonly')
+    eredmeny_jelzo.grid(row=4, column=1)
+
+    kilepes_gomb = Button(henger_felszin_ablak, text="Kilépés", command=henger_felszin_ablak.destroy)
+    kilepes_gomb.grid(row=5, column=1)
+
+    henger_felszin_ablak.mainloop()
+
+def henger_terfogat():
+    def szamitas():
+        sugara = int(sugara_bemenet.get())
+        magassaga = int(magassag_bemenet.get())
+        
+        if sugara <= 0 or magassaga <= 0:
+            messagebox.showerror("Hiba!", "Ne adj meg 0-át, vagy mínuszos számot!")
+        else:
+            terfogata = pi * sugara * sugara * magassaga
+
+            eredmeny_jelzo.configure(state=NORMAL)
+            eredmeny_jelzo.delete(0, END)
+            eredmeny_jelzo.insert(0, "{:.2f}".format(terfogata) + " cm3")
+            eredmeny_jelzo.configure(state="readonly")
+
+    henger_terfogat_ablak = Toplevel(foablak)
+    henger_terfogat_ablak.title("Henger térfogata")
+
+    sugara_text = Label(henger_terfogat_ablak, text="Henger sugara: ")
+    sugara_text.grid(row=0)
+
+    sugara_bemenet = Entry(henger_terfogat_ablak)
+    sugara_bemenet.grid(row=0, column=1)
+
+    magassag_szoveg = Label(henger_terfogat_ablak, text="Magassága:")
+    magassag_szoveg.grid(row=1, column=0)
+
+    magassag_bemenet = Entry(henger_terfogat_ablak)
+    magassag_bemenet.grid(row=1, column=1)
+
+    szamol = Button(henger_terfogat_ablak, text="Számol", command=szamitas)
+    szamol.grid(row=2, column=1)
+
+    eredmeny = Label(henger_terfogat_ablak, text="Eredmény:")
+    eredmeny.grid(row=4)
+
+    eredmeny_jelzo = Entry(henger_terfogat_ablak, state='readonly')
+    eredmeny_jelzo.grid(row=4, column=1)
+
+    kilepes_gomb = Button(henger_terfogat_ablak, text="Kilépés", command=henger_terfogat_ablak.destroy)
+    kilepes_gomb.grid(row=5, column=1)
+
+    henger_terfogat_ablak.mainloop()
 
 foablak = Tk()
 foablak.title("Főablak")
@@ -118,5 +228,12 @@ teglatest = Menu(menu2)
 teglatest.add_command(label='Felszín', command=felszin, underline=0)
 teglatest.add_command(label='Térfogat', command=terfogat, underline=0)
 menu2.config(menu=teglatest)
+
+menu3 = Menubutton(menusor, text="Henger", underline=0)
+menu3.pack(side=LEFT)
+henger = Menu(menu3)
+henger.add_command(label='Felszín', command=henger_felszin, underline=0)
+henger.add_command(label='Térfogat', command=henger_terfogat, underline=0)
+menu3.config(menu=henger)
 
 foablak.mainloop()
